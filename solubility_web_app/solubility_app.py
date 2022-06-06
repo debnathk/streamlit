@@ -61,7 +61,7 @@ def generate(smiles, verbosa=False):
 image = Image.open('solubility-logo.jpg')
 st.image(image, use_column_width=True)
 st.write("""
-# Molecular Solubility Prediction Web App
+## Molecular Solubility Prediction Web App
 
 This app predicts the **Solubility (LogS)** values
 of molecules!
@@ -85,3 +85,14 @@ SMILES[1:]  # Skips the dummy first item
 st.header('Computed Molecular Descriptors')
 X = generate(SMILES)
 X[1:]  # Skips the dummy first item
+
+# Pre-built model
+# Reads in saved model
+load_model = pickle.load(open('solubility_model.pkl', 'rb'))
+
+# Apply model to make predictions
+prediction = load_model.predict(X)
+# prediction_proba = load_model.predict_proba(X)
+
+st.header('Predicted LogS values')
+prediction[1:]  # Skips the dummy first item
