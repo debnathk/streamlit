@@ -56,6 +56,7 @@ def generate(smiles, verbosa=False):
 
     return descriptors
 
+
 # Page Title
 image = Image.open('solubility-logo.jpg')
 st.image(image, use_column_width=True)
@@ -67,3 +68,20 @@ of molecules!
 
 Data obtained from the John S. Delaney. [ESOL:  Estimating Aqueous Solubility Directly from Molecular Structure](https://pubs.acs.org/doi/10.1021/ci034243x). ***J. Chem. Inf. Comput. Sci.*** 2004, 44, 3, 1000-1005.
 """)
+
+# Input Molecules (Side Panel)
+st.sidebar.header('User Input Features')
+# Read SMILES input
+SMILES_input = "NCCCC\nCCC\nCN"
+
+SMILES = st.sidebar.text_area("SMILES input", SMILES_input)
+SMILES = "C\n" + SMILES  # Adds C as a dummy, first item
+SMILES = SMILES.split('\n')
+
+st.header('Input SMILES')
+SMILES[1:]  # Skips the dummy first item
+
+# Calculate molecular descriptors
+st.header('Computed Molecular Descriptors')
+X = generate(SMILES)
+X[1:]  # Skips the dummy first item
