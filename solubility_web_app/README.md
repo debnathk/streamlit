@@ -34,3 +34,5 @@ As a limitation, GSE cannot predict the solubility of a molecule if the Tm is un
 ## ![Experimental vs Predicted LogS for Training Data](exp_vs_pred.png)
 
 ---
+
+- Finally, model is saved as a `Pickle Object`.
