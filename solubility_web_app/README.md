@@ -38,8 +38,12 @@ As a limitation, GSE cannot predict the solubility of a molecule if the Tm is un
 
 - Finally, model is saved as a `Pickle Object`.
 
-Write briefly about the app building
+Now, it's time to build the web app!
 
-finally attach the screenshot of the app
+[Streamlit] (https://streamlit.io/) is used to build the web app here. It is a fast and light-weight open-source framework based on `Python`. Coding using this framework is extremely easy one can start coding on it `without any prior front-end knowledge`. 
 
-also add the outputs
+The final result can be seen [here] (). 
+
+Thank you for your attention.
+
+Happy coding :)
