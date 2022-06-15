@@ -40,7 +40,7 @@ As a limitation, GSE cannot predict the solubility of a molecule if the Tm is un
 
 Now, it's time to build the web app!
 
-[Streamlit] (https://streamlit.io/) is used to build the web app here. It is a fast and light-weight open-source framework based on `Python`. Coding using this framework is extremely easy one can start coding on it `without any prior front-end knowledge`. 
+- [Streamlit](https://streamlit.io/) is used to build the web app here. It is a fast and light-weight open-source framework based on `Python`. Coding using this framework is extremely easy one can start coding on it `without any prior front-end knowledge`. 
 
 The final result can be seen [here] (). 
 
