@@ -24,6 +24,19 @@ As a limitation, GSE cannot predict the solubility of a molecule if the Tm is un
 ---
 
 - First of all, dataset is collected from [here](https://raw.githubusercontent.com/dataprofessor/data/master/delaney_solubility_with_descriptors.csv), containing **MolLogP**, **MolWt**, **NumRotatableBonds**, **AromaticProportion** and finally **logS** columns.
+`	MolLogP	MolWt	NumRotatableBonds	AromaticProportion	logS
+0	2.59540	167.850	0.0	0.000000	-2.180
+1	2.37650	133.405	0.0	0.000000	-2.000
+2	2.59380	167.850	1.0	0.000000	-1.740
+3	2.02890	133.405	1.0	0.000000	-1.480
+4	2.91890	187.375	1.0	0.000000	-3.040
+...	...	...	...	...	...
+1139	1.98820	287.343	8.0	0.000000	1.144
+1140	3.42130	286.114	2.0	0.333333	-4.925
+1141	3.60960	308.333	4.0	0.695652	-3.893
+1142	2.56214	354.815	3.0	0.521739	-3.790
+1143	2.02164	179.219	1.0	0.461538	-2.581
+1144 rows × 5 columns`
 - Next, **logS** column is dropped and assigned as the `target`.
   **Linear Regression Model** is used for the prediction, and model performance is checked.
 - Next, model equataion is created, containing the five parameters.
@@ -36,3 +49,9 @@ As a limitation, GSE cannot predict the solubility of a molecule if the Tm is un
 ---
 
 - Finally, model is saved as a `Pickle Object`.
+
+Write briefly about the app building
+
+finally attach the screenshot of the app
+
+also add the outputs
