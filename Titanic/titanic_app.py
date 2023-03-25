@@ -5,8 +5,8 @@ from PIL import Image
 import numpy as np
 
 # Add image
-# img = Image.open('titanic-ship.jpg')
-# st.image(img, use_column_width = True, caption = 'Titanic - 1912')
+img = Image.open('Titanic/titanic-ship.jpg')
+st.image(img, use_column_width = True, caption = 'Titanic - 1912')
 
 # # Add music
 # audio_file = open('titanic.mp3', 'rb')
@@ -37,7 +37,7 @@ if button:
 st.write("Passenger details: ", sample)
 
 # Add model
-with open('model_pkl' , 'rb') as f:
+with open('Titanic/model_pkl' , 'rb') as f:
     rf = pickle.load(f)
 
 # Transform query
