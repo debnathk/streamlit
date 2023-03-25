@@ -34,61 +34,60 @@ if button:
     sample = {'Ticket Class': pclass, 'Sex': sex, 'Age': age, 'Siblings/Spouses': sibsp, 'Parents/Children': parch, 'Ticket fare': fare, 'Port of Embarkation': embarked}
     # X_test = np.array([[pclass, sex, age, sibsp, parch, fare, embarked]])
 
-st.write("Passenger details: ", sample)
+    st.write("Passenger details: ", sample)
 
-# Add model
-with open('Titanic/model_pkl' , 'rb') as f:
-    rf = pickle.load(f)
+    # Transform query
+    X_sample = list(sample.values())
 
-# Transform query
-X_sample = list(sample.values())
+    if sample['Ticket Class'] == "1st":
+        X_sample[0] = 1
+    elif sample['Ticket Class'] == "2nd":
+        X_sample[0] = 2
+    elif sample['Ticket Class'] == "3rd":
+        X_sample[0] = 3
 
-if sample['Ticket Class'] == "1st":
-    X_sample[0] = 1
-elif sample['Ticket Class'] == "2nd":
-    X_sample[0] = 2
-elif sample['Ticket Class'] == "3rd":
-    X_sample[0] = 3
+    if sample['Port of Embarkation'] == "Southampton":
+        X_sample[6] = 'S'
+    elif sample['Port of Embarkation'] == "Queenstown":
+        X_sample[6] = 'Q'
+    elif sample['Port of Embarkation'] == "Cherbourg":
+        X_sample[6] = 'C'
 
-if sample['Port of Embarkation'] == "Southampton":
-    X_sample[6] = 'S'
-elif sample['Port of Embarkation'] == "Queenstown":
-    X_sample[6] = 'Q'
-elif sample['Port of Embarkation'] == "Cherbourg":
-    X_sample[6] = 'C'
+    # Manual one-hot encoding for a single sample
+    X_transformed = []
+    if X_sample[1] == 'Male' and X_sample[6] == 'S':
+        X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 1, 0, 0]
+    elif X_sample[1] == 'Male' and X_sample[6] == 'C':
+        X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 1, 0]
+    elif X_sample[1] == 'Male' and X_sample[6] == 'Q':
+        X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 0, 1]
+    elif X_sample[1] == 'Female' and X_sample[6] == 'S':
+        X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 1, 0, 0]
+    elif X_sample[1] == 'Female' and X_sample[6] == 'C':
+        X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 1, 0]
+    elif X_sample[1] == 'Female' and X_sample[6] == 'Q':
+        X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 0, 1]
 
-# Manual one-hot encoding for a single sample
-X_transformed = []
-if X_sample[1] == 'Male' and X_sample[6] == 'S':
-    X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 1, 0, 0]
-elif X_sample[1] == 'Male' and X_sample[6] == 'C':
-    X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 1, 0]
-elif X_sample[1] == 'Male' and X_sample[6] == 'Q':
-    X_transformed = [X_sample[0], 1, 0, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 0, 1]
-elif X_sample[1] == 'Female' and X_sample[6] == 'S':
-    X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 1, 0, 0]
-elif X_sample[1] == 'Female' and X_sample[6] == 'C':
-    X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 1, 0]
-elif X_sample[1] == 'Female' and X_sample[6] == 'Q':
-    X_transformed = [X_sample[0], 0, 1, X_sample[2], X_sample[3], X_sample[4], X_sample[5], 0, 0, 1]
+    X_pred = {
+        'Pclass' : [X_transformed[0]],
+         'Age' : [X_transformed[1]],
+         'SibSp' : [X_transformed[2]],
+         'Parch' : [X_transformed[3]],
+         'Fare' : [X_transformed[4]],
+         'Sex_male' : [X_transformed[5]],
+         'Sex_female' : [X_transformed[6]],
+         'Embarked_S' : [X_transformed[7]],
+         'Embarked_C' : [X_transformed[8]],
+         'Embarked_Q' : [X_transformed[9]]
+    }
+    X_pred = pd.DataFrame.from_dict(X_pred)
 
-X_pred = {
-    'Pclass' : [X_transformed[0]],
-     'Age' : [X_transformed[1]],
-     'SibSp' : [X_transformed[2]],
-     'Parch' : [X_transformed[3]],
-     'Fare' : [X_transformed[4]],
-     'Sex_male' : [X_transformed[5]],
-     'Sex_female' : [X_transformed[6]],
-     'Embarked_S' : [X_transformed[7]],
-     'Embarked_C' : [X_transformed[8]],
-     'Embarked_Q' : [X_transformed[9]]
-}
-X_pred = pd.DataFrame.from_dict(X_pred)
+    # Add model
+    with open('Titanic/model_pkl' , 'rb') as f:
+        rf = pickle.load(f)
+    prediction = rf.predict(X_pred)
 
-prediction = rf.predict(X_pred)
-
-if prediction[0] == 0:
-    st.subheader("Destiny: RIP!")
-elif prediction[0] == 1:
-    st.subheader("Destiny: You survived, by god's grace!")
+    if prediction[0] == 0:
+        st.subheader("Destiny: RIP!")
+    elif prediction[0] == 1:
+        st.subheader("Destiny: You survived, by god's grace!")
