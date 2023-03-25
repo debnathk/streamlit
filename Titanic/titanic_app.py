@@ -5,8 +5,8 @@ import numpy as np
 from joblib import load
 
 # Add image
-# img = Image.open('titanic-ship.jpg')
-# st.image(img, use_column_width = True, caption = 'Titanic - 1912')
+img = Image.open('titanic-ship.jpg')
+st.image(img, use_column_width = True, caption = 'Titanic - 1912')
 
 # # Add music
 # audio_file = open('titanic.mp3', 'rb')
