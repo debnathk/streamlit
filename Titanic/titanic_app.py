@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 
 # Add Copywrite
-st.markdown("&copy; **Kusal Debnath**")
+st.markdown("&copy; ** 2023 Kusal Debnath.")
 
 # Add image
 img = Image.open('Titanic/titanic-ship.jpg')
