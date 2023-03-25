@@ -3,7 +3,6 @@ import pickle
 import pandas as pd
 from PIL import Image
 import numpy as np
-from joblib import load
 
 # Add image
 # img = Image.open('titanic-ship.jpg')
