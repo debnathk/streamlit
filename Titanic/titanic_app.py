@@ -4,6 +4,9 @@ import pandas as pd
 from PIL import Image
 import numpy as np
 
+# Add Copywrite
+st.markdown("&copy; **Kusal Debnath**")
+
 # Add image
 img = Image.open('Titanic/titanic-ship.jpg')
 st.image(img, use_column_width = True, caption = 'Titanic - 1912')
